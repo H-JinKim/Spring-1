@@ -1,5 +1,6 @@
 package com.example.hello.controller;
 
+import com.example.hello.dto.UserRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -25,7 +26,7 @@ public class GetAPIController {
     }
 
     @GetMapping("/query-parameter")
-    public String querypram(@RequestParam Map<String, String>queryParam){
+    public String querypram(@RequestParam Map<String, String> queryParam){
         StringBuilder sb = new StringBuilder();
 
         queryParam.entrySet().forEach(entry -> {
@@ -39,6 +40,33 @@ public class GetAPIController {
         return sb.toString();
     }
 
+    @GetMapping("/query-parameter2")
+    public String querypram2(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam int age
+    ) {
+        System.out.println(name);
+        System.out.println(email);
+        System.out.println(age);
+
+        return name + email + age;
+
+    }
+
+
+    @GetMapping("/query-parameter3")
+    public String querypram3(UserRequest userRequest){
+
+        System.out.println((userRequest.getName()));
+        System.out.println(userRequest.getEmail());
+        System.out.println(userRequest.getAge());
+
+        return userRequest.toString();
+
+    }
+        //same way as the one above, but it is more simple when we know the input.
+    // go to "dto" package  to see another method-recommended method
 
 
 }
